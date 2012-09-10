@@ -25,14 +25,9 @@ trait Field[T <: Field[T]] { self:T =>
 
   /* iterative multiplication */
   
-  def *(n:BigInt) : T = {
-    var acc = this
-    for (i <- n.bitLength-2 to 0 by -1){
-      acc = acc.x2
-      if(n.testBit(i))
-    	  acc = acc + this
-    }
-    acc
-  }
+   def * (n:BigInt): T= {
+     (n.bitLength-2 to 0 by -1)
+     .foldLeft(this)((a,b)=>if(n.testBit(b)) a.x2 +this else a.x2 )
+   }
 
 }

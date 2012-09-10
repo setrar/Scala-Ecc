@@ -1,20 +1,6 @@
 package ecc
 import scala.util.Random
 
-object Key{
-  def fromPub(pub:(BigInt, BigInt), curve:Curve = ECDSA.defaultCurve) = {
-    new Key(curve.point(pub))
-  }
-
-  def fromSec(sec:BigInt, curve:Curve = ECDSA.defaultCurve) = {
-    new Key(curve.P * sec, sec)
-  }
-  
-  def fromCompPub(comp:BigInt, curve:Curve = ECDSA.defaultCurve) = 
-    new Key(ECDSA.unpackPoint(comp, curve))
-
-}
-
 class Key(val pub:CurvePoint, sec:BigInt = null, val random:Random = new Random()) {
   lazy val curve = pub.curve
   lazy val n = curve.n
@@ -58,4 +44,16 @@ class Key(val pub:CurvePoint, sec:BigInt = null, val random:Random = new Random(
   override def toString =
     "x: " + pub.x.toString(16) + "\n" +
     "y: " + pub.y.toString(16) + (if(sec == null) "" else "\nsec: " + sec.toString(16))
+}
+
+object Key{
+  def apply(pub:(BigInt, BigInt), curve:Curve) = 
+    new Key(curve.point(pub))
+
+  def apply(sec:BigInt, curve:Curve) = 
+    new Key(curve.P * sec, sec)
+  
+//  def fromCompPub(comp:BigInt, curve:Curve = ECDSA.defaultCurve) = 
+//    new Key(ECDSA.unpackPoint(comp, curve))
+
 }
