@@ -38,14 +38,21 @@ Clone the project then type `sbt run`
 
 ## Testing
 
-(coming soon)
-
 `sbt test`
+
+## Coding
+
+`sbt eclipse`
 
 ## Milo-minderbender changes
 
 As best I can, make things more idiomatically scala.  Simplify, remove unreachable code  remove vars.
 
-TODO: native scala Base64 conversion.  The existing library is 1800 odd lines of code.
-
 TODO: extensive tests.
+
+## setrar changes
+
+Added net.iharder.base64-2.3.8 package from Maven
+
+Added FreeSpec 
+
